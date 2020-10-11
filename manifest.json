@@ -1,0 +1,18 @@
+{
+    "manifest_version": 2,
+
+    "description": "Custom Facebook Messenger Emotes!",
+    "name": "Custom Messenger Emotes!",
+    "short_name": "custom_messenger_emotes",
+    "version": "1.0.0",
+
+    "content_scripts": [{
+        "all_frames": true,
+        "js": ["index.js"],
+        "matches": ["*://www.messenger.com/*", "*://www.facebook.com/messages/*"],
+        "run_at": "document_idle"
+    }],
+
+    "permissions": ["*://www.messenger.com/*", "*://www.facebook.com/messages/*"],
+    "web_accessible_resources": ["emotes.json"]
+}
