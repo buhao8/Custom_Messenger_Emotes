@@ -1,7 +1,3 @@
-function save_json(json) {
-    window.emotes = json.emotes;
-}
-
 function replace_arr(arr) {
     for (i = 0; i < arr.length; ++i) {
         if (!arr[i].hasAttribute("emotified")) {
