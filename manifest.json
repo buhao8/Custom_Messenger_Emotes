@@ -14,5 +14,5 @@
     }],
 
     "permissions": ["*://www.messenger.com/*", "*://www.facebook.com/messages/*"],
-    "web_accessible_resources": ["emotes.json"]
+    "web_accessible_resources": ["emotes.json", "styles.css"]
 }

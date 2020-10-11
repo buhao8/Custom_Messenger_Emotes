@@ -1,3 +1,12 @@
+function load_css(file) {
+    let link = document.createElement("link");
+    link.href = chrome.extension.getURL(file);
+    link.id = file;
+    link.type = "text/css";
+    link.rel = "stylesheet";
+    document.getElementsByTagName("head")[0].appendChild(link);
+}
+
 function replace_arr(arr) {
     for (i = 0; i < arr.length; ++i) {
         if (!arr[i].hasAttribute("emotified")) {
@@ -5,7 +14,10 @@ function replace_arr(arr) {
                 let emote = window.emotes[j];
                 let expr = ":" + emote.name + ":";
                 let str = arr[i].innerHTML;
-                arr[i].innerHTML = str.replace(new RegExp(expr, 'ig'), "<img src=\"" + emote.url + "\""
+                arr[i].innerHTML = str.replace(new RegExp(expr, 'ig'),
+                       "<span class=\"emote\" data=\"" + expr + "\">"
+                       + "<img src=\"" + emote.url + "\""
+                       + " alt=\"" + emote.name + "\""
                        + " height=\"" + (str.toLowerCase() === expr.toLowerCase() ? "48" : "22") + "\"></span>");
 
                 let attr = document.createAttribute("emotified");
@@ -69,6 +81,8 @@ function plugin_main() {
         fetch(json_url)
             .then((response) => response.json())
             .then((json) => { window.emotes = json.emotes; });
+
+        load_css('styles.css');
 
         //MutationObserver for switching conversations
         window.conversation_switch_observer = new MutationObserver(function() {
