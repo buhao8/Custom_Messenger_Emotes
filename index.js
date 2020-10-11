@@ -14,14 +14,15 @@ function replace_arr(arr) {
                 let emote = window.emotes[j];
                 let expr = ":" + emote.name + ":";
                 let str = arr[i].innerHTML;
+                let is_single = str.toLowerCase() === expr.toLowerCase();
                 arr[i].innerHTML = str.replace(new RegExp(expr, 'ig'),
-                       "<span class=\"emote\" data=\"" + expr + "\">"
+                       "<span class=\"" + (is_single ? "emote" : "emote_s") + "\" data=\"" + expr + "\">"
                        + "<img src=\"" + emote.url + "\""
                        + " alt=\"" + emote.name + "\""
-                       + " height=\"" + (str.toLowerCase() === expr.toLowerCase() ? "48" : "22") + "\"></span>");
+                       + " height=\"" + (is_single ? "48" : "22") + "\"></span>");
 
                 // Remove speech bubble for single image
-                if (str.toLowerCase() === expr.toLowerCase())
+                if (is_single)
                     arr[i].parentNode.parentNode.style.backgroundColor = "rgba(0, 0, 0, 0)";
 
                 let attr = document.createAttribute("emotified");
