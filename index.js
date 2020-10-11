@@ -20,6 +20,10 @@ function replace_arr(arr) {
                        + " alt=\"" + emote.name + "\""
                        + " height=\"" + (str.toLowerCase() === expr.toLowerCase() ? "48" : "22") + "\"></span>");
 
+                // Remove speech bubble for single image
+                if (str.toLowerCase() === expr.toLowerCase())
+                    arr[i].parentNode.parentNode.style.backgroundColor = "rgba(0, 0, 0, 0)";
+
                 let attr = document.createAttribute("emotified");
                 arr[i].setAttributeNode(attr);
             }
@@ -86,17 +90,13 @@ function plugin_main() {
 
         //MutationObserver for switching conversations
         window.conversation_switch_observer = new MutationObserver(function() {
-            setTimeout(function() {
-                replace_emotes();
-            }, 500);
+            replace_emotes();
             conversation_changed();
         });
 
         // Replace emotes on mutation after 100ms
         window.incoming_observer = new MutationObserver(function() {
-            setTimeout(function() {
-                replace_emotes();
-            }, 100);
+            replace_emotes();
         });
 
         conversation_changed();
