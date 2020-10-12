@@ -19,7 +19,7 @@ function replace_arr(arr) {
                        "<span class=\"" + (is_single ? "emote" : "emote_s") + "\" data=\"" + expr + "\">"
                        + "<img src=\"" + emote.url + "\""
                        + " alt=\"" + emote.name + "\""
-                       + " height=\"" + (is_single ? "48" : "22") + "\"></span>");
+                       + " height=\"" + (is_single ? "60" : "22") + "\"></span>");
 
                 // Remove speech bubble for single image
                 if (is_single)
